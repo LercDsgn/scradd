@@ -58,6 +58,7 @@ const info = {
 		}
 
 		const input = interaction.options.getString("addon");
+		if(input in addons){const output = addons.input} else{
 		const output = input
 			? fuse.search(input).sort((a, b) => {
 					a.score ??= 0;
@@ -67,7 +68,8 @@ const info = {
 					else return 0;
 			  })[0] || {}
 			: { score: 0, item: addons[Math.floor(Math.random() * addons.length)] };
-
+		}	
+			
 		if (!output.item) {
 			return interaction.reply({
 				content: "That addon does not exist!",
