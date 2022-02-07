@@ -166,6 +166,15 @@ export default async (message) => {
 					content.split(/\W+/g).includes(text + "es")))
 		);
 	}
+	reactStrings = [ [stringOrArrayOfStrings, emoji] ]
+	reactStrings = [ [["sat on addons"], ["sa", "soa", "sa2"]] ]
+	
+	reactStrings.forEach(reactPair =>{
+		//if ((typeof i[0] == "string") && content.includes(i[0])) message.react(i)
+		else reactPair.forEach(section => { if(content.includes(j)) message.react(j) })
+	}) 
+	
+	
 	if (includes("dango") || content.includes("🍡")) message.react("🍡");
 	if (content === "e" || content === ".") message.react("<:e_:939986562937151518>");
 	if (content == "potato" || content == "potatoes" || content.includes("🥔")) message.react("🥔");
