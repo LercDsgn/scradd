@@ -15,6 +15,8 @@ if (!GUILD_ID) throw new Error("GUILD_ID is not set in the .env.");
 
 /** @param {import("discord.js").Message} message */
 export default async (message) => {
+
+// Modmail
 	if (message.author.id === message.client.user?.id) return;
 
 	if (message.channel.type === "DM" && ["DEFAULT", "REPLY"].includes(message.type)) {
@@ -143,15 +145,15 @@ export default async (message) => {
 		channel?.send(generateMessage(message));
 		return;
 	}
-
+// Incidate suggestion command replacement
 	if (message.content.startsWith("r!suggest"))
 		message.reply({
 			content: "`r!suggest` has been removed, please use `/suggestion create`.",
 		});
-
+// React messages pinging bot
 	if (message.mentions.users.has(message.client.user?.id || "") && message.type !== "REPLY")
 		message.react("👋");
-
+// React messages including meme-y strings
 	const content = message.content.toLowerCase();
 
 	/**
@@ -185,6 +187,7 @@ export default async (message) => {
 			.then(() => message.react("<:soa_full1:939336229449789510>"))
 			.then(() => message.react("<:sa_full3:939336281454936095>"));
 
+// Warn to not ping in commands used on other members
 	const firstMention = message.mentions.users.first();
 	if (
 		content.match(/^r!(mimic|possess|sudo|speakas|sayas|impersonate)\s+<@!?\d+>/iu) &&
@@ -201,7 +204,7 @@ export default async (message) => {
 			}\`. This command had to be disabled in the past because people kept pinging Griffpatch while using it. Please let us keep this on. Thanks!`,
 		});
 	}
-
+// Prevent Spoiler Hack
 	const spoilerHack = "||​||".repeat(200);
 	if (content.includes(spoilerHack)) {
 		const arr = message.cleanContent.split(spoilerHack);
